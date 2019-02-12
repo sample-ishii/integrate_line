@@ -1,5 +1,5 @@
 """
-チャネルIDやらトークンやら
+channel ID and tokens
 """
 
 user_id="Ue8d38351e975746041eda06ae8365fcf"
