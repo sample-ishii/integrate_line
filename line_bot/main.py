@@ -8,7 +8,6 @@ import urllib.request
 import os
 import sys
 import json
-import scrape as sc
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -55,11 +54,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    result = sc.getNews(event.message.text)
-
     line_bot_api.reply_message(
     event.reply_token,
-    TextSendMessage(text=result)
+    TextSendMessage(text=event.message.text)
     )
 
 if __name__ == "__main__":
