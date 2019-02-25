@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Feb  4 13:26:32 2019
-@author: 991928
-"""
+
 import os
 import sys
 from account_response import Response as res
