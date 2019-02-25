@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Feb  4 13:26:32 2019
-
 @author: 991928
 """
-import urllib.request
 import os
 import sys
-import json
-from argparse import ArgumentParser
+import account_response as res
 
 from flask import Flask, request, abort
 from linebot import (
@@ -56,7 +53,7 @@ def handle_message(event):
 
     line_bot_api.reply_message(
     event.reply_token,
-    TextSendMessage(text="hello world!!")
+    TextSendMessage(text=os.getenv(res.getResponse(event.message.text)))
     )
 
 if __name__ == "__main__":
