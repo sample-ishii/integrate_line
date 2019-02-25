@@ -5,7 +5,7 @@ Created on Mon Feb  4 13:26:32 2019
 """
 import os
 import sys
-import account_response as res
+from account_response import Response as res
 
 from flask import Flask, request, abort
 from linebot import (
