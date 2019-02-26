@@ -55,7 +55,7 @@ def handle_message(event):
     #入力された内容(event.message.text)に応じて返信する
     line_bot_api.reply_message(
     event.reply_token,
-    TextSendMessage(text=os.getenv(res.getResponse(event.message.text)))
+    TextSendMessage(text=event.message.text)
     )
 
 if __name__ == "__main__":
