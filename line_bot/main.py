@@ -17,17 +17,8 @@ from linebot.models import (
 app = Flask(__name__)
 
 #Herokuのconfigで設定した定数を取得、第二引数は取得できなかった時のデフォルト値
-channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
-channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
-if channel_secret is None:
-    print('Specify LINE_CHANNEL_SECRET as environment variable.')
-    sys.exit(1)
-if channel_access_token is None:
-    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
-    sys.exit(1)
-
-line_bot_api = LineBotApi(channel_access_token)
-handler = WebhookHandler(channel_secret)
+line_bot_api = LineBotApi('LINE_CHANNEL_ACCESS_TOKEN')
+handler = WebhookHandler('LINE_CHANNEL_SECRET')
 
 #LINEからのWebhook
 @app.route("/callback", methods=['POST'])
