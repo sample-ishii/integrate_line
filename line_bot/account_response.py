@@ -21,5 +21,5 @@ class Response:
         for _dic in response.dic:
             if _dic==text:
                 return response.dic[text]
-        return Response.count
+        return response.count
 
