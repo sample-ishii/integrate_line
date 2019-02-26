@@ -2,7 +2,6 @@
 import os
 import sys
 from account_response import Response as res
-import channel
 
 from flask import Flask, request, abort
 from linebot import (
@@ -18,8 +17,8 @@ from linebot.models import (
 app = Flask(__name__)
 
 #Herokuのconfigで設定した定数を取得、第二引数は取得できなかった時のデフォルト値
-channel_secret = channel.channel_secret
-channel_access_token = channel.access_token
+channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
+channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
     sys.exit(1)
@@ -56,7 +55,7 @@ def handle_message(event):
     #入力された内容(event.message.text)に応じて返信する
     line_bot_api.reply_message(
     event.reply_token,
-    TextSendMessage(text=event.message.text)
+    TextSendMessage(text=os.getenv(res.getResponse(event.message.text)))
     )
 
 if __name__ == "__main__":
