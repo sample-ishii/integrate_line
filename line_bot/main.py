@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import sys
 from account_response import Response as res
@@ -17,6 +16,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 
+#Herokuのconfigで設定した定数を取得、第二引数は取得できなかった時のデフォルト値
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 if channel_secret is None:
@@ -29,7 +29,7 @@ if channel_access_token is None:
 line_bot_api = LineBotApi('LINE_CHANNEL_ACCESS_TOKEN')
 handler = WebhookHandler('LINE_CHANNEL_SECRET')
 
-
+#LINEからのWebhook
 @app.route("/callback", methods=['POST'])
 def callback():
     # リクエストヘッダーから署名検証のための値を取得
@@ -44,7 +44,6 @@ def callback():
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-
     return 'OK'
 
 #LINEでMessageEvent（普通のメッセージを送信された場合）が起こった場合
@@ -52,12 +51,14 @@ def callback():
 #第二引数には、linebot.modelsに定義されている返信用のTextSendMessageオブジェクトを渡しています。
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-
+    
+    #入力された内容(event.message.text)に応じて返信する
     line_bot_api.reply_message(
     event.reply_token,
     TextSendMessage(text=os.getenv(res.getResponse(event.message.text)))
     )
 
 if __name__ == "__main__":
-    #port = int(os.getenv("PORT", 8000))
-    app.run(host="0.0.0.0") #, port=port)
+    port = int(os.getenv("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
+    
