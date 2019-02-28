@@ -13,13 +13,12 @@ class Response:
          }
     count=0
     
-    @classmethod
-    def getResponse(response,text):
-        if response.count>=4:
-            response.count=0
-        response.count+=1
-        for _dic in response.dic:
-            if _dic==text:
-                return response.dic[text]
-        return response.count
+    def _getResponse(self,text):
+        if self.count >= 4:
+            self.count = 0
+        self.count += 1
+        for _dic in self.dic:
+            if _dic == text:
+                return self.dic[text]
+        return self.count
 
