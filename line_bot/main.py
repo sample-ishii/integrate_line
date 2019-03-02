@@ -16,6 +16,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
+res()
+
 #Herokuのconfigで設定した定数を取得、第二引数は取得できなかった時のデフォルト値
 channel_secret = os.environ['LINE_CHANNEL_SECRET']
 channel_access_token = os.environ['LINE_CHANNEL_ACCESS_TOKEN']
