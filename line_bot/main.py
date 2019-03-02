@@ -16,9 +16,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-res()
-
-#Herokuのconfigで設定した定数を取得、第二引数は取得できなかった時のデフォルト値
+#Herokuの変数からトークンなどを取得
 channel_secret = os.environ['LINE_CHANNEL_SECRET']
 channel_access_token = os.environ['LINE_CHANNEL_ACCESS_TOKEN']
 if channel_secret is None:
@@ -57,7 +55,7 @@ def handle_message(event):
     #入力された内容(event.message.text)に応じて返信する
     line_bot_api.reply_message(
     event.reply_token,
-    TextSendMessage(text=os.environ[res.getResponse(event.message.text)])
+    TextSendMessage(text=os.environ[res().getResponse(event.message.text)])
     )
 
 if __name__ == "__main__":
