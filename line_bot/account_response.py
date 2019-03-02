@@ -13,7 +13,7 @@ class Response:
          }
     count=0
     
-    def _getResponse(self,text):
+    def getResponse(self,text):
         if self.count >= 4:
             self.count = 0
         self.count += 1
